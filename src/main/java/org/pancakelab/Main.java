@@ -55,7 +55,12 @@ public class Main {
 
         // Delivery service delivers the order
         DeliveryService deliveryService = new DeliveryService();
-        deliveryService.deliverOrder(flavoredOrder);
+        try {
+            deliveryService.deliverOrder(flavoredOrder);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+
 
         // Remove order from database
         database.removeOrder(darkChocolateOrderIdDb);
