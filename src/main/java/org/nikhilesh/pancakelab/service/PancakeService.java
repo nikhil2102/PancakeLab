@@ -66,7 +66,7 @@ public class PancakeService {
         pancake.setOrderId(order.getId());
         pancakes.add(pancake);
 
-//        OrderLog.logAddPancake(order, pancake.description(), pancakes);
+        OrderLog.logAddPancake(order, pancake.getName(), pancakes);
     }
 
     public void removePancakes(String name, UUID orderId, int count) {
@@ -78,19 +78,19 @@ public class PancakeService {
         });
 
         Order order = orders.stream().filter(o -> o.getId().equals(orderId)).findFirst().get();
-//        OrderLog.logRemovePancakes(order, name, removedCount.get(), pancakes);
+        OrderLog.logRemovePancakes(order, name, removedCount.get(), pancakes);
     }
 
     public void cancelOrder(UUID orderId) {
         Order order = orders.stream().filter(o -> o.getId().equals(orderId)).findFirst().get();
-//        OrderLog.logCancelOrder(order, this.pancakes);
+        OrderLog.logCancelOrder(order, this.pancakes);
 
         pancakes.removeIf(pancake -> pancake.getOrderId().equals(orderId));
         orders.removeIf(o -> o.getId().equals(orderId));
         completedOrders.removeIf(u -> u.equals(orderId));
         preparedOrders.removeIf(u -> u.equals(orderId));
 
-//        OrderLog.logCancelOrder(order, pancakes);
+        OrderLog.logCancelOrder(order, pancakes);
     }
 
     public void completeOrder(UUID orderId) {
@@ -116,7 +116,7 @@ public class PancakeService {
 
         Order order = orders.stream().filter(o -> o.getId().equals(orderId)).findFirst().get();
         List<String> pancakesToDeliver = viewOrder(orderId);
-//        OrderLog.logDeliverOrder(order, this.pancakes);
+        OrderLog.logDeliverOrder(order, this.pancakes);
 
         pancakes.removeIf(pancake -> pancake.getOrderId().equals(orderId));
         orders.removeIf(o -> o.getId().equals(orderId));
